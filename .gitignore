@@ -1,0 +1,46 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.python-version
+
+# VSCode settings
+.vscode/
+*.code-workspace
+
+# MacOS files
+.DS_Store
+
+# Logs
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python environment config
+pip-selfcheck.json
+
+# Data directories (enrollment images and DB)
+data/enroll/
+data/db/
+
+# ONNX models (if you don't want to track large binaries)
+models/*.onnx
+
+# Backup / temporary files
+*.bak
+*.tmp
+*.swp
+
+# IDE/project-specific files
+.idea/
+*.iml
+
+# Pytest cache
+.pytest_cache/
