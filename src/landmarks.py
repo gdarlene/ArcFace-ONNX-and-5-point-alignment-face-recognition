@@ -1,12 +1,9 @@
 # src/landmarks.py
 """
 Minimal pipeline:
-camera -> Haar face box -> MediaPipe FaceMesh (full-frame)
--> extract 5 keypoints -> draw
-
+camera -> Haar face box -> MediaPipe FaceMesh (full-frame) -> extract 5 keypoints -> draw
 Run:
 python -m src.landmarks
-
 Keys:
 q : quit
 """
@@ -61,7 +58,7 @@ def main():
         )
 
         # draw ALL haar faces (no ranking)
-        for (x, y, w, h) in faces:
+        for x, y, w, h in faces:
             cv2.rectangle(
                 frame,
                 (x, y),
@@ -89,28 +86,28 @@ def main():
                 p = lm[i]
                 pts.append([p.x * W, p.y * H])
 
-            kps = np.array(pts, dtype=np.float32)  # (5, 2)
+            kps = np.array(pts, dtype=np.float32)
+            # (5,2)
 
             # enforce left/right ordering
             if kps[0, 0] > kps[1, 0]:
                 kps[[0, 1]] = kps[[1, 0]]
-
             if kps[3, 0] > kps[4, 0]:
                 kps[[3, 4]] = kps[[4, 3]]
 
             # draw 5 points
-            for (px, py) in kps.astype(int):
-                cv2.circle(frame, (px, py), 4, (0, 255, 0), -1)
+            for px, py in kps.astype(int):
+                cv2.circle(frame, (int(px), int(py)), 4, (0, 255, 0), -1)
 
-        cv2.putText(
-            frame,
-            "5pt",
-            (10, 30),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.9,
-            (0, 255, 0),
-            2,
-        )
+            cv2.putText(
+                frame,
+                "5pt",
+                (10, 30),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.9,
+                (0, 255, 0),
+                2,
+            )
 
         cv2.imshow("5pt Landmarks", frame)
 
